@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import logo from './logo.svg';
 import './App.css';
 
@@ -35,7 +36,13 @@ class App extends React.Component {
     const items = this.state.items;
     const index = items.indexOf(item);
     // TODO: Remove `item` at `index`
-    console.log(items.splice(index, 1));
+    items.splice(index, 1);
+
+    this.setState(() => {
+      return {
+        items
+      }
+    });
   }
   
   render() {
@@ -83,7 +90,10 @@ const Item = (props) => {
   return (
     <div className="item">
       {props.item}
-      <span onClick={() => props.handleRemoveSingleItem(props.item)}><strong>X</strong></span>
+      <span 
+        className="deleteItem"
+        onClick={() => props.handleRemoveSingleItem(props.item)}><strong>X</strong>
+      </span>
     </div>
   );
 };
@@ -129,4 +139,4 @@ class AddItem extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+export default App;
